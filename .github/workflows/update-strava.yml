@@ -37,7 +37,7 @@ jobs:
             "schemaVersion": 1,
             "label": "'"$CURRENT_YEAR Distance Ran"'",
             "message": "'"$DISTANCE_MILES miles"'",
-            "color": "#FC4C02",
+            "color": "#FC4C02"
           }' > strava.json
 
       - name: Commit and Push JSON
