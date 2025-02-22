@@ -14,6 +14,9 @@ jobs:
 
       - name: Fetch Strava Stats
         run: |
+          # Get current year
+          CURRENT_YEAR=$(date +"%Y")
+
           # Get new Strava Access Token
           STRAVA_TOKEN=$(curl -X POST "https://www.strava.com/oauth/token" \
             -d client_id=${{ secrets.STRAVA_CLIENT_ID }} \
@@ -26,15 +29,17 @@ jobs:
             https://www.strava.com/api/v3/athletes/${{ secrets.STRAVA_ATHLETE_ID }}/stats)
 
           # Extract distance in meters and convert to miles
-          DISTANCE=$(echo $STATS | jq -r '.all_run_totals.distance')
-          DISTANCE_MILES=$(awk "BEGIN {print $DISTANCE/1609.34}")
+          DISTANCE=$(echo $STATS | jq -r '.ytd_run_totals.distance')
+          DISTANCE_MILES=$(awk "BEGIN {printf \"%.2f\", $DISTANCE/1609.34}")
 
           # Create JSON for shields.io
           echo '{
             "schemaVersion": 1,
-            "label": "Distance Ran",
+            "label": "'"$CURRENT_YEAR Distance Ran"'",
             "message": "'"$DISTANCE_MILES miles"'",
-            "color": "orange"
+            "color": "#FC4C02",
+            "logo": "strava",
+            "logoColor": "#FC4C02"
           }' > strava.json
 
       - name: Commit and Push JSON
