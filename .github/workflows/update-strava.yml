@@ -38,8 +38,6 @@ jobs:
             "label": "'"$CURRENT_YEAR Distance Ran"'",
             "message": "'"$DISTANCE_MILES miles"'",
             "color": "#FC4C02",
-            "logo": "strava",
-            "logoColor": "#FC4C02"
           }' > strava.json
 
       - name: Commit and Push JSON
