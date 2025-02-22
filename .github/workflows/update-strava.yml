@@ -1,0 +1,46 @@
+name: Update Strava Stats
+
+on:
+  schedule:
+    - cron: "0 0 */2 * *" # Runs once every 2 days at midnight UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch Strava Stats
+        run: |
+          # Get new Strava Access Token
+          STRAVA_TOKEN=$(curl -X POST "https://www.strava.com/oauth/token" \
+            -d client_id=${{ secrets.STRAVA_CLIENT_ID }} \
+            -d client_secret=${{ secrets.STRAVA_CLIENT_SECRET }} \
+            -d refresh_token=${{ secrets.STRAVA_REFRESH_TOKEN }} \
+            -d grant_type=refresh_token | jq -r '.access_token')
+
+          # Fetch athlete stats
+          STATS=$(curl -H "Authorization: Bearer $STRAVA_TOKEN" \
+            https://www.strava.com/api/v3/athletes/${{ secrets.STRAVA_ATHLETE_ID }}/stats)
+
+          # Extract distance in meters and convert to miles
+          DISTANCE=$(echo $STATS | jq -r '.all_run_totals.distance')
+          DISTANCE_MILES=$(awk "BEGIN {print $DISTANCE/1609.34}")
+
+          # Create JSON for shields.io
+          echo '{
+            "schemaVersion": 1,
+            "label": "Distance Ran",
+            "message": "'"$DISTANCE_MILES miles"'",
+            "color": "orange"
+          }' > strava.json
+
+      - name: Commit and Push JSON
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add strava.json
+          git commit -m "Update Strava Stats" || exit 0
+          git push
