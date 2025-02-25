@@ -3,7 +3,7 @@
 <img src="https://github.com/hsimpson270/hsimpson270/blob/main/images/github_hero.svg" width="380" align="right">
 
 ![Profile Views](https://komarev.com/ghpvc/?username=hsimpson270&color=579cd5&label=Profile_Views&abbreviated=true)
-![Strava](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hsimpson270/hsimpson270/main/strava.json&logo=strava&cacheSeconds=86400)
+![Strava](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hsimpson270/strava-badge/main/strava.json&logo=strava)
 
 I'm a senior software engineer with nearly 8 years of experience in front-end web development. Currently working at [Ncontracts](https://www.ncontracts.com/), I am creating internal component libraries and architecting SaaS products servicing thousands of clients.
 
