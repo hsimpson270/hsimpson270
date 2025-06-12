@@ -5,7 +5,7 @@
 ![Profile Views](https://komarev.com/ghpvc/?username=hsimpson270&color=579cd5&label=Profile_Views&abbreviated=true)
 ![Strava](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/hsimpson270/strava-badge/main/strava.json&logo=strava)
 
-I'm a senior software engineer with nearly 8 years of experience in front-end web development. Currently working at [Ncontracts](https://www.ncontracts.com/), I am creating internal component libraries and architecting SaaS products servicing thousands of clients.
+I'm a senior software engineer with 8 years of experience in front-end web development. Currently working at [Omatic](https://omaticsoftware.com/), I am creating internal component libraries and architecting SaaS products servicing thousands of clients.
 
 ### 💻 &nbsp;&nbsp;Skills
 
